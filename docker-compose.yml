@@ -1,0 +1,23 @@
+# Base Oracle XE prête à l'emploi pour EduManager.
+#   docker compose up -d      -> démarre Oracle (premier démarrage : 1 à 2 minutes)
+#   docker compose down       -> arrête la base (les données sont conservées)
+services:
+  oracle:
+    image: gvenzl/oracle-xe:21-slim
+    container_name: edumanager-oracle
+    ports:
+      - "1521:1521"
+    environment:
+      ORACLE_PASSWORD: oracle_admin
+      APP_USER: edumanager
+      APP_USER_PASSWORD: edumanager
+    volumes:
+      - oracle-data:/opt/oracle/oradata
+    healthcheck:
+      test: ["CMD", "healthcheck.sh"]
+      interval: 10s
+      timeout: 5s
+      retries: 30
+
+volumes:
+  oracle-data:
