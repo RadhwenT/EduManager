@@ -1,0 +1,26 @@
+# Build
+target/
+bin/
+out/
+*.class
+
+# Configuration locale (identifiants de la base)
+db.properties
+
+# IDE
+.idea/
+*.iml
+.classpath
+.project
+.settings/
+.factorypath
+.vscode/*
+!.vscode/settings.json
+!.vscode/launch.json
+!.vscode/tasks.json
+!.vscode/extensions.json
+
+# Système
+.DS_Store
+Thumbs.db
+desktop.ini
