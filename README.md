@@ -45,7 +45,7 @@ src/main/resources/db/schema.sql   # schéma Oracle + données de démo
 Les tests (JUnit 5) vérifient la logique métier sur une **vraie base Oracle** lancée automatiquement dans Docker par Testcontainers : hachage des mots de passe, création du schéma, inscriptions et matricules, classes et affectations (réaffectation, permutation), paiements et reste à payer, comptes enseignants et détection des conflits d'affectation, saisie des notes.
 
 ```bash
-mvn test        # Docker doit être démarré
+./mvnw test      # Docker doit être démarré (sous Windows : .\mvnw test)
 ```
 
 Ils s'exécutent aussi à chaque push grâce à GitHub Actions.
@@ -81,7 +81,7 @@ Modifiez `db.properties` si besoin (URL, utilisateur, mot de passe). Ce fichier 
 ### 4. Lancer l'application
 
 - **Dans VS Code :** ouvrez le dossier, attendez le chargement du projet Java, puis lancez la configuration **EduManager** (onglet *Run and Debug*, ou *Run* au-dessus de `main` dans `Launcher.java`).
-- **En ligne de commande** (Maven installé) : `mvn javafx:run`
+- **En ligne de commande** (Maven non nécessaire) : `./mvnw javafx:run` (sous Windows : `.\mvnw javafx:run`)
 
 Au premier lancement sur une base vide, l'application **crée automatiquement toutes les tables** et ajoute des données de démo : année 2026-2027, 6 niveaux, matières.
 
