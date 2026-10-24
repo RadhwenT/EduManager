@@ -8,6 +8,18 @@ Application de bureau **JavaFX** connectée à une base **Oracle** pour gérer u
 
 ---
 
+## Aperçu
+
+![Tableau de bord du directeur](docs/captures/directeur.png)
+
+| Administrateur — fiches élèves | Enseignant — saisie des notes |
+| --- | --- |
+| ![Espace administrateur](docs/captures/administrateur.png) | ![Espace enseignant](docs/captures/enseignant.png) |
+| **Financier — encaissements** | **Connexion** |
+| ![Espace financier](docs/captures/financier.png) | ![Page de connexion](docs/captures/connexion.png) |
+
+*Captures réalisées avec les données de démonstration (`scripts/demo-data.sql`).*
+
 ## Fonctionnalités
 
 L'application propose **4 espaces**, chacun accessible selon le rôle de l'utilisateur connecté.
