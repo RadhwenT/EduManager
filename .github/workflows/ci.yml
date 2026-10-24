@@ -47,7 +47,7 @@ jobs:
           docker cp /tmp/schema.sql edumanager-oracle:/tmp/schema.sql
           docker exec -e NLS_LANG=AMERICAN_AMERICA.AL32UTF8 edumanager-oracle sqlplus -s edumanager/edumanager@//localhost/XEPDB1 @/tmp/schema.sql
           docker cp scripts/demo-data.sql edumanager-oracle:/tmp/demo-data.sql
-          docker exec -e NLS_LANG=AMERICAN_AMERICA.AL32UTF8 edumanager-oracle sqlplus -s edumanager/edumanager@//localhost/XEPDB1 @/tmp/demo-data.sql | tee demo.log
+          docker exec -e NLS_LANG=AMERICAN_AMERICA.AL32UTF8 edumanager-oracle sqlplus -s edumanager/edumanager@//localhost/XEPDB1 '@/tmp/demo-data.sql' | tee demo.log
           if grep -q 'ORA-\|SP2-' demo.log; then grep 'ORA-\|SP2-' demo.log | head -5 | while IFS= read -r l; do echo "::error::$l"; done; exit 1; fi
 
       - name: Vérifier le résultat (élèves, accents)

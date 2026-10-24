@@ -99,7 +99,7 @@ Pour explorer l'application avec une école déjà remplie (90 élèves, 9 class
 
 ```bash
 docker cp scripts/demo-data.sql edumanager-oracle:/tmp/demo-data.sql
-docker exec -e NLS_LANG=AMERICAN_AMERICA.AL32UTF8 edumanager-oracle sqlplus -s edumanager/edumanager@//localhost/XEPDB1 @/tmp/demo-data.sql
+docker exec -e NLS_LANG=AMERICAN_AMERICA.AL32UTF8 edumanager-oracle sqlplus -s edumanager/edumanager@//localhost/XEPDB1 '@/tmp/demo-data.sql'
 ```
 
 Le script peut être relancé sans créer de doublons. Comptes ajoutés (mot de passe `demo2026`) : `admin.demo`, `financier.demo` et les enseignants `mbensalah`, `khaddad`, `smzali`, `hboukadi`, `ldammak`, `wsmaoui`.

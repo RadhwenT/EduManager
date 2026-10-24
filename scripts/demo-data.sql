@@ -3,7 +3,7 @@
 --  NON exécuté automatiquement par l'application : à lancer une seule fois,
 --  sur la base Docker, après un premier démarrage de l'application :
 --    docker cp scripts/demo-data.sql edumanager-oracle:/tmp/demo-data.sql
---    docker exec -e NLS_LANG=AMERICAN_AMERICA.AL32UTF8 edumanager-oracle sqlplus -s edumanager/edumanager@//localhost/XEPDB1 @/tmp/demo-data.sql
+--    docker exec -e NLS_LANG=AMERICAN_AMERICA.AL32UTF8 edumanager-oracle sqlplus -s edumanager/edumanager@//localhost/XEPDB1 '@/tmp/demo-data.sql'
 --  Ré-exécutable sans risque : chaque insertion vérifie qu'elle n'existe pas déjà.
 --  Comptes créés (mot de passe identique pour tous) : demo2026
 --    admin.demo (administrateur), financier.demo (financier), enseignants : voir plus bas
