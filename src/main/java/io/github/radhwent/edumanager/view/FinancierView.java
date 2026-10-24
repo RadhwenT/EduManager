@@ -65,7 +65,7 @@ public class FinancierView {
         menu.setPadding(new Insets(10, 0, 10, 0));
 
         ToggleButton btnPay = menuBtn("💰 Encaissements");
-        ToggleButton btnTarifs = menuBtn("🏷️ Tarifs Niveaux");
+        ToggleButton btnTarifs = menuBtn("🏷 Tarifs Niveaux");
         ToggleButton btnVers = menuBtn("🏦 Versements");
 
         ToggleGroup tg = new ToggleGroup();
@@ -95,7 +95,7 @@ public class FinancierView {
         btnLogout.setStyle("-fx-background-color: transparent; -fx-border-color: " + BORDER + "; -fx-border-radius: 4px; -fx-text-fill: " + TEXT_MID + "; -fx-font-size: 11px; -fx-cursor: hand;");
         btnLogout.setOnAction(e -> new LoginView(stage).show());
 
-        Button btnSettings = new Button("⚙️ Paramètres");
+        Button btnSettings = new Button("⚙ Paramètres");
         btnSettings.setStyle("-fx-background-color: transparent; -fx-border-color: " + BORDER + "; -fx-border-radius: 4px; -fx-text-fill: " + BLUE + "; -fx-font-size: 11px; -fx-cursor: hand;");
         btnSettings.setOnAction(e -> showAccountSettingsDialog());
 
@@ -303,7 +303,7 @@ public class FinancierView {
         cbMode.setMaxWidth(Double.MAX_VALUE);
         cbMode.setPrefHeight(38);
 
-        Button btnPreview = new Button("👁️ Aperçu du reçu");
+        Button btnPreview = new Button("👁 Aperçu du reçu");
         styleSecondaryButton(btnPreview);
         btnPreview.setMaxWidth(Double.MAX_VALUE);
 
@@ -332,7 +332,7 @@ public class FinancierView {
         VBox previewBox = buildReceiptNode(info, m, mode);
         previewBox.setStyle("-fx-background-color: white; -fx-padding: 40; -fx-border-color: #EEE; -fx-border-width: 1;");
         
-        Button btnPrint = new Button("🖨️ Confirmer & Imprimer");
+        Button btnPrint = new Button("🖨 Confirmer & Imprimer");
         stylePrimaryButton(btnPrint);
         btnPrint.setMaxWidth(Double.MAX_VALUE);
         

@@ -102,7 +102,7 @@ public class AdminView {
         styleSecondaryButton(btnLogout);
         btnLogout.setOnAction(e -> new LoginView(stage).show());
 
-        Button btnSettings = new Button("⚙️");
+        Button btnSettings = new Button("⚙");
         styleSecondaryButton(btnSettings);
         btnSettings.setTooltip(new Tooltip("Paramètres du compte"));
         btnSettings.setOnAction(e -> showAccountSettingsDialog(adminUser));
@@ -1627,7 +1627,7 @@ public class AdminView {
         Button btnGen = new Button("Générer");
         stylePrimaryButton(btnGen);
 
-        Button btnPrintAll = new Button("🖨️ Imprimer Tout");
+        Button btnPrintAll = new Button("🖨 Imprimer Tout");
         styleSecondaryButton(btnPrintAll);
         btnPrintAll.setDisable(true);
 
@@ -1695,7 +1695,7 @@ public class AdminView {
         VBox rootCard = new VBox(10);
         rootCard.setAlignment(Pos.TOP_RIGHT);
 
-        Button btnPrint = new Button("🖨️ Imprimer");
+        Button btnPrint = new Button("🖨 Imprimer");
         styleSecondaryButton(btnPrint);
         
         VBox card = new VBox(25);
