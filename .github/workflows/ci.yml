@@ -18,7 +18,7 @@ jobs:
           cache: maven
 
       - name: Compilation et tests (Oracle lancé par Testcontainers)
-        run: mvn -B verify 2>&1 | tee build.log; exit ${PIPESTATUS[0]}
+        run: ./mvnw -B verify 2>&1 | tee build.log; exit ${PIPESTATUS[0]}
 
       - name: Résumé des erreurs
         if: failure()
