@@ -5,7 +5,7 @@
       "type": "java",
       "name": "EduManager",
       "request": "launch",
-      "mainClass": "application.Launcher",
+      "mainClass": "io.github.radhwent.edumanager.Launcher",
       "projectName": "edumanager",
       "cwd": "${workspaceFolder}"
     }
