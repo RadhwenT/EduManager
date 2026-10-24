@@ -19,7 +19,7 @@
         <ojdbc.version>23.5.0.24.07</ojdbc.version>
         <main.class>application.Launcher</main.class>
         <junit.version>5.11.4</junit.version>
-        <testcontainers.version>1.20.4</testcontainers.version>
+        <testcontainers.version>1.21.4</testcontainers.version>
     </properties>
 
     <dependencies>
