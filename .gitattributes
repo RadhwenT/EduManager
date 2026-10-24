@@ -1,2 +1,4 @@
 /mvnw text eol=lf
 *.cmd text eol=crlf
+# Statistiques de langage GitHub : le script de données de démo (SQL) ne doit pas masquer le code Java
+scripts/demo-data.sql linguist-generated=true
