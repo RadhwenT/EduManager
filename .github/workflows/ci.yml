@@ -29,3 +29,31 @@ jobs:
       - name: Nombre de tests exécutés
         if: always()
         run: grep -E 'Tests run:' build.log | tail -1 | while IFS= read -r l; do echo "::notice::$l"; done
+
+  demo-sqlplus:
+    # Rejoue la commande du README : schéma puis données de démo via SQL*Plus dans le conteneur
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v5
+
+      - name: Démarrer Oracle comme docker compose
+        run: |
+          docker run -d --name edumanager-oracle -e ORACLE_PASSWORD=oracle_admin -e APP_USER=edumanager -e APP_USER_PASSWORD=edumanager gvenzl/oracle-xe:21-slim-faststart
+          for i in $(seq 1 60); do docker exec edumanager-oracle healthcheck.sh && break; sleep 5; done
+
+      - name: Schéma puis données de démo (commandes du README)
+        run: |
+          (cat src/main/resources/db/schema.sql; echo; echo "EXIT;") > /tmp/schema.sql
+          docker cp /tmp/schema.sql edumanager-oracle:/tmp/schema.sql
+          docker exec -e NLS_LANG=AMERICAN_AMERICA.AL32UTF8 edumanager-oracle sqlplus -s edumanager/edumanager@//localhost/XEPDB1 @/tmp/schema.sql
+          docker cp scripts/demo-data.sql edumanager-oracle:/tmp/demo-data.sql
+          docker exec -e NLS_LANG=AMERICAN_AMERICA.AL32UTF8 edumanager-oracle sqlplus -s edumanager/edumanager@//localhost/XEPDB1 '@/tmp/demo-data.sql' | tee demo.log
+          if grep -q 'ORA-\|SP2-' demo.log; then grep 'ORA-\|SP2-' demo.log | head -5 | while IFS= read -r l; do echo "::error::$l"; done; exit 1; fi
+
+      - name: Vérifier le résultat (élèves, accents)
+        run: |
+          printf "SET HEADING OFF FEEDBACK OFF\nSELECT COUNT(*) FROM eleve;\nSELECT COUNT(*) FROM classe WHERE nom = '1èreannée-A';\nEXIT;\n" > /tmp/check.sql
+          docker cp /tmp/check.sql edumanager-oracle:/tmp/check.sql
+          out=$(docker exec -e NLS_LANG=AMERICAN_AMERICA.AL32UTF8 edumanager-oracle sqlplus -s edumanager/edumanager@//localhost/XEPDB1 @/tmp/check.sql | tr -s ' \n' ' ')
+          echo "::notice::résultat : $out"
+          [ "$(echo $out)" = "90 1" ]

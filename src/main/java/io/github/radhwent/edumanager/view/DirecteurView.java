@@ -62,7 +62,7 @@ public class DirecteurView {
         ToggleButton btnDash  = sideBtn("📊  Tableau de Bord", tg);
         ToggleButton btnAnnee = sideBtn("📅  Années Scolaires", tg);
         ToggleButton btnUsers = sideBtn("👥  Utilisateurs", tg);
-        ToggleButton btnParam = sideBtn("⚙️  Paramètres", tg);
+        ToggleButton btnParam = sideBtn("⚙  Paramètres", tg);
 
         btnDash .setOnAction(e -> showDashboard());
         btnAnnee.setOnAction(e -> showAnnees());
@@ -82,7 +82,7 @@ public class DirecteurView {
         logout.setStyle("-fx-background-color:transparent;-fx-border-color:" + BORDER + ";-fx-border-radius:4;-fx-cursor:hand;-fx-text-fill:" + MUTED + ";");
         logout.setOnAction(e -> new LoginView(stage).show());
 
-        Button btnSettings = new Button("⚙️ Paramètres");
+        Button btnSettings = new Button("⚙ Paramètres");
         btnSettings.setStyle("-fx-background-color:transparent;-fx-border-color:" + BORDER + ";-fx-border-radius:4;-fx-cursor:hand;-fx-text-fill:" + BLUE + ";-fx-font-size:11px;");
         btnSettings.setOnAction(e -> showAccountSettingsDialog());
         top.getChildren().addAll(user, sp, btnSettings, logout);

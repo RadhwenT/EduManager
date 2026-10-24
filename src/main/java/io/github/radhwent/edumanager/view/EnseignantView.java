@@ -69,7 +69,7 @@ public class EnseignantView {
 		Button btnLogout = new Button("Déconnexion");
 		btnLogout.setOnAction(e -> new LoginView(stage).show());
 
-		Button btnSettings = new Button("⚙️ Paramètres");
+		Button btnSettings = new Button("⚙ Paramètres");
 		btnSettings.setOnAction(e -> showAccountSettingsDialog());
 
 		HBox topButtons = new HBox(10, btnSettings, btnLogout);

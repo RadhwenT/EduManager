@@ -8,6 +8,18 @@ Application de bureau **JavaFX** connectée à une base **Oracle** pour gérer u
 
 ---
 
+## Aperçu
+
+![Tableau de bord du directeur](docs/captures/directeur.png)
+
+| Administrateur — fiches élèves | Enseignant — saisie des notes |
+| --- | --- |
+| ![Espace administrateur](docs/captures/administrateur.png) | ![Espace enseignant](docs/captures/enseignant.png) |
+| **Financier — encaissements** | **Connexion** |
+| ![Espace financier](docs/captures/financier.png) | ![Page de connexion](docs/captures/connexion.png) |
+
+*Captures réalisées avec les données de démonstration (`scripts/demo-data.sql`).*
+
 ## Fonctionnalités
 
 L'application propose **4 espaces**, chacun accessible selon le rôle de l'utilisateur connecté.
@@ -85,13 +97,24 @@ Modifiez `db.properties` si besoin (URL, utilisateur, mot de passe). Ce fichier 
 
 Au premier lancement sur une base vide, l'application **crée automatiquement toutes les tables** et ajoute des données de démo : année 2026-2027, 6 niveaux, matières.
 
-### Compte de démonstration
+### Comptes
 
 | Rôle | Login | Mot de passe |
 | --- | --- | --- |
 | Directeur | `directeur` | `dir2024` |
 
 Depuis l'espace Directeur, créez ensuite les comptes **administrateur** et **financier**. Les comptes **enseignant** sont créés par l'administrateur. Pensez à changer le mot de passe du directeur après la première connexion.
+
+### 5. (Optionnel) Charger des données de démonstration
+
+Pour explorer l'application avec une école déjà remplie (90 élèves, 9 classes, 6 enseignants, notes du 1er trimestre, paiements), lancez une fois l'application pour créer les tables, puis :
+
+```bash
+docker cp scripts/demo-data.sql edumanager-oracle:/tmp/demo-data.sql
+docker exec -e NLS_LANG=AMERICAN_AMERICA.AL32UTF8 edumanager-oracle sqlplus -s edumanager/edumanager@//localhost/XEPDB1 '@/tmp/demo-data.sql'
+```
+
+Le script peut être relancé sans créer de doublons. Comptes ajoutés (mot de passe `demo2026`) : `admin.demo`, `financier.demo` et les enseignants `mbensalah`, `khaddad`, `smzali`, `hboukadi`, `ldammak`, `wsmaoui`.
 
 ## Auteur
 
