@@ -4,7 +4,7 @@ Application de bureau **JavaFX** connectée à une base **Oracle** pour gérer u
 
 > Projet fédéré — 2e année Licence Génie Logiciel et Systèmes d'Information, Institut International de Technologie (IIT, Sfax). Note obtenue : **20/20**.
 
-![Java](https://img.shields.io/badge/Java-21-orange) ![JavaFX](https://img.shields.io/badge/JavaFX-21-blue) ![Oracle](https://img.shields.io/badge/Oracle-XE-red) ![Maven](https://img.shields.io/badge/Build-Maven-informational)
+[![CI](https://github.com/RadhwenT/edumanager/actions/workflows/ci.yml/badge.svg)](https://github.com/RadhwenT/edumanager/actions/workflows/ci.yml) ![Java](https://img.shields.io/badge/Java-21-orange) ![JavaFX](https://img.shields.io/badge/JavaFX-21-blue) ![Oracle](https://img.shields.io/badge/Oracle-XE-red) ![Maven](https://img.shields.io/badge/Build-Maven-informational)
 
 ---
 
@@ -29,16 +29,26 @@ L'application propose **4 espaces**, chacun accessible selon le rôle de l'utili
 - Architecture en couches : modèles (`Eleve`, `Classe`…), DAO (accès aux données), vues JavaFX
 
 ```
-src/main/java/application/
+src/main/java/io/github/radhwent/edumanager/
 ├── Main.java / Launcher.java     # démarrage
-├── DBConnection.java              # connexion Oracle (config externe)
-├── DBInitializer.java             # création / mise à jour automatique du schéma
-├── PasswordUtil.java              # hachage des mots de passe
-├── *DAO.java                      # accès aux données
-├── LoginView.java + *View.java    # interfaces par rôle
-└── modèles (Eleve, Classe, Enseignant, Niveau, Matiere…)
+├── db/          DBConnection (config externe), DBInitializer (création / mise à jour du schéma)
+├── security/    PasswordUtil (hachage PBKDF2)
+├── model/       Eleve, Classe, Enseignant, Niveau, Matiere, AnneeScolaire, User
+├── dao/         accès aux données (requêtes SQL paramétrées)
+└── view/        LoginView + une vue JavaFX par rôle
+src/test/java/                     # tests JUnit 5 sur une base Oracle jetable (Testcontainers)
 src/main/resources/db/schema.sql   # schéma Oracle + données de démo
 ```
+
+## Tests
+
+Les tests (JUnit 5) vérifient la logique métier sur une **vraie base Oracle** lancée automatiquement dans Docker par Testcontainers : hachage des mots de passe, création du schéma, inscriptions et matricules, classes et affectations (réaffectation, permutation), paiements et reste à payer, comptes enseignants et détection des conflits d'affectation, saisie des notes.
+
+```bash
+./mvnw test      # Docker doit être démarré (sous Windows : .\mvnw test)
+```
+
+Ils s'exécutent aussi à chaque push grâce à GitHub Actions.
 
 ## Lancer le projet
 
@@ -71,7 +81,7 @@ Modifiez `db.properties` si besoin (URL, utilisateur, mot de passe). Ce fichier 
 ### 4. Lancer l'application
 
 - **Dans VS Code :** ouvrez le dossier, attendez le chargement du projet Java, puis lancez la configuration **EduManager** (onglet *Run and Debug*, ou *Run* au-dessus de `main` dans `Launcher.java`).
-- **En ligne de commande** (Maven installé) : `mvn javafx:run`
+- **En ligne de commande** (Maven non nécessaire) : `./mvnw javafx:run` (sous Windows : `.\mvnw javafx:run`)
 
 Au premier lancement sur une base vide, l'application **crée automatiquement toutes les tables** et ajoute des données de démo : année 2026-2027, 6 niveaux, matières.
 
